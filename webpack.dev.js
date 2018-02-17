@@ -23,6 +23,7 @@ let config = {
                 loader: 'babel-loader',
                 query: {
                     presets: ['es2015'],
+                    plugins:['transform-decorators-legacy'],
                     retainLines:true
                 }
             }]

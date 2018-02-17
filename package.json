@@ -12,6 +12,7 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-polyfill": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "strip-loader": "^0.1.2",
@@ -23,6 +24,7 @@
   "dependencies": {
     "detect-browser": "^2.0.0",
     "keyboardjs": "^2.4.1",
+    "meld": "^1.3.2",
     "mitt": "^1.1.2",
     "whatwg-fetch": "^2.0.3"
   },

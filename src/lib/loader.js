@@ -22,20 +22,22 @@ export default class LoaderAllMedia extends Context{
 
         let {musicData} = param;
 
-        this._allKeys = musicData;
+        this._allKeys = musicData.data;
+        this._dir = musicData.dir;
 
 
     }
 
     download(){
+
         Promise.all(Object.keys(this._allKeys).map(key=>{
-            return fetch('src/assets/audio/' + this._allKeys[key].name + '.mp3')
+            return fetch('src/assets/'+ this._dir +'/' + this._allKeys[key].name )
             .then(res=>{
                  return res.arrayBuffer()
             })
             .then(audio=>{
                 this._context.decodeAudioData(audio,buffer =>{
-                     
+                     this._allKeys[key].buffer =  buffer;
                 })
             })
         }))
