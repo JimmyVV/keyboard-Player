@@ -5,5 +5,19 @@ Keyboard Player 是一款能够让键盘变为乐器的 HTML5。里面技术使�
 ## 运行方式
 
 ```
-git clone 
+git clone https://github.com/JimmyVV/keyboard-Player.git
 ```
+
+下载 npm
+
+```
+npm intall
+```
+
+完毕之后直接运行：
+
+```
+npm start
+```
+
+然后，打开 [localhost:8080](localhost:8080) 即可看到本地运行的内容。
