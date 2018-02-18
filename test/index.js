@@ -1,8 +1,12 @@
 import '../src/lib/polyfill';
+import React from  'react';
+import ReactDOM from 'react-dom';
+import KeyBoard from '../src/component/keyboard';
 import Loader from '../src/lib/loader';
 import Player  from '../src/play';
 import keyboard from 'keyboardjs';
 import {guitar,drum,bass} from '../src/lib/musicData';
+
 
 const log = console.log.bind(console);
 
@@ -12,12 +16,25 @@ class Controller{
 
 
         this._targetData = guitar;
+        this._player = new Player();
 
         // now we could get the all the media resources.
         this._main();
-        this._getChoice();
 
-        this._player = new Player();
+        this._bindChoiceHandler();
+
+        
+    }
+    _getInitKeys(){
+        this._initKeys = {};
+        
+        Object.keys(this._targetData.data).forEach(key=>{
+            this._initKeys[key] = {
+                type:'letter',
+                press: false
+            }
+        });
+
     }
     onChange(choice){
         switch(choice){
@@ -29,9 +46,9 @@ class Controller{
             break;
             case "bass":
                 this._targetData = bass;
-            default:
-
         }
+
+
 
         this._main();
     }
@@ -40,10 +57,19 @@ class Controller{
         this._loader = new Loader({musicData: this._targetData});
         this._loader.download();
         this._bindKeys();
+
+        this._getInitKeys();
+
+        this._renderKey();
+
+    }
+    _renderKey(){
+
+        ReactDOM.render(<KeyBoard keyBoard={this._initKeys}  />,document.getElementById('react-container'));
     }
 
-    _getChoice(){
-        this._input = document.getElementById('musci-choice');
+    _bindChoiceHandler(){
+        this._input = document.getElementById('music-choice');
 
         this._input.addEventListener('change',
         (e)=>{
@@ -56,7 +82,7 @@ class Controller{
         keyboard.reset();
 
         Object.keys(this._music).forEach(key=>{
-            debugger
+
             let player = this._player.createPlay();
 
             keyboard.on(key,(e)=>{
@@ -64,9 +90,15 @@ class Controller{
                 // press down
                 player.play(this._music[key].buffer,key);
 
+                this._initKeys[key].press = true;
+
+                this._renderKey();
             },()=>{
                 // press up
                 // player.stop();
+                this._initKeys[key].press = false;
+
+                this._renderKey();
             });
         })
     }

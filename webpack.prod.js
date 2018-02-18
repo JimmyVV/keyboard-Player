@@ -25,7 +25,7 @@ let config = {
             use: [{
                 loader: 'babel-loader',
                 query: {
-                    presets: ['es2015'],
+                    presets: ['react','es2015'],
                 }
             }]
         }]

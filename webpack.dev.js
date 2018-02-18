@@ -22,14 +22,16 @@ let config = {
             use: [{
                 loader: 'babel-loader',
                 query: {
-                    presets: ['es2015'],
-                    plugins:['transform-decorators-legacy'],
-                    retainLines:true
+                    presets: ['react','es2015'],
                 }
             }]
+        },{
+            test:/\.(css|scss)$/ ,
+            use:[
+                'style-loader','css-loader','sass-loader'
+            ]
         }]
-    },
-    plugins: []
+    }
 }
 
 

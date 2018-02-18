@@ -3,7 +3,9 @@ const log = console.log.bind(console);
 
 export default class Graph{
     constructor(analyse){
-        this._canvas = document.getElementsByName('canvas')[0];
+
+        this._canvas = document.getElementById('audio-graph');
+
         this._graph = this._canvas.getContext('2d');
         this._analyseNode = analyse;
 
@@ -55,7 +57,6 @@ export default class Graph{
         this._freqBuffer.forEach(freq=>{
             this._graph.fillStyle = `rgba(200,200,${freq/10},1)`;
 
-            log(`rgba(200,200,${freq/10},1)`);
             // the canvas's y_axis is inverted, so the y_axis is invert
             this._graph.fillRect(x,this._config.height - freq/3,barWid,freq/2);
 
